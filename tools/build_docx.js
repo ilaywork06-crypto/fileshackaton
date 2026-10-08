@@ -7,7 +7,7 @@ const {
   PageNumber, PageBreak, TableOfContents
 } = d;
 
-const md = fs.readFileSync(process.argv[2], 'utf8');
+const md = fs.readFileSync(process.argv[2], 'utf8').replace(/^<\/?div[^>]*>[ \t]*\n/gm, '').replace(/^\n+/, '');
 const out = process.argv[3];
 const tokens = marked.lexer(md);
 
@@ -125,7 +125,7 @@ const doc = new Document({
   title: 'תוכנית יום האקטון',
   features: { updateFields: true },
   styles: {
-    default: { document: { run: { font: FONT, size: 22, rightToLeft: true }, paragraph: { bidirectional: true } } },
+    default: { document: { run: { font: FONT, size: 22, rightToLeft: true, language: { value: 'he-IL', bidirectional: 'he-IL' } }, paragraph: { bidirectional: true } } },
     paragraphStyles: [
       { id: 'Heading1', name: 'Heading 1', basedOn: 'Normal', next: 'Normal', quickFormat: true,
         run: { font: FONT, size: 36, bold: true, color: C.primary, rightToLeft: true }, paragraph: { spacing: { before: 120, after: 240 }, outlineLevel: 0, bidirectional: true } },

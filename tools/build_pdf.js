@@ -3,7 +3,7 @@ const path = require('path');
 const { marked } = require('marked');
 const { chromium } = require('playwright');
 
-const md = fs.readFileSync(process.argv[2], 'utf8');
+const md = fs.readFileSync(process.argv[2], 'utf8').replace(/^<\/?div[^>]*>[ \t]*\n/gm, '').replace(/^\n+/, '');
 const out = process.argv[3];
 const F = path.join(__dirname, 'fonts');
 const font = (fam, dir, w) => ['hebrew', 'latin'].map(s =>
@@ -40,7 +40,7 @@ const cover = `
     <div><b>150</b><span>עובדים</span></div>
     <div><b>24</b><span>צוותים</span></div>
     <div><b>1–2</b><span>ימים</span></div>
-    <div><b>₪0</b><span>תקציב</span></div>
+    <div><b>6</b><span>מסלולים</span></div>
   </div>
   <div class="foot">מסמך תכנון מלא · מטרות · פורמטים · Claude · צוותים · לו"ז · במה · שיפוט · לוגיסטיקה</div>
 </div>`;
@@ -59,7 +59,7 @@ const glance = `
   <div class="cards">
     <div class="card"><h4>הפורמט המומלץ</h4><p>היברידי מבוסס מסלולים, ביומיים אם אפשר: בנק כאבים שנאסף מראש + Wild Card פתוח.</p></div>
     <div class="card"><h4>Claude כמכפיל כוח</h4><p>כל משתתף עובד עם Claude, אלוף Claude בכל צוות, ו"Claude ב-60 דקות" לפני היום.</p></div>
-    <div class="card"><h4>אפס תקציב</h4><p>משרד, ציוד קיים, המנוי הקיים, ופרסים שלא עולים כסף — זמן להמשיך, הכרה, במה מול ההנהלה.</p></div>
+    <div class="card"><h4>לוגיסטיקה פשוטה</h4><p>המשרד, הציוד ו-Claude שכבר קיימים בחברה. הפרסים: זמן להמשיך, הכרה ובמה מול ההנהלה.</p></div>
     <div class="card"><h4>אחרי היום</h4><p>Hack to Prod: שבועיים של זמן מוקדש ל-3 הזוכים, ודו"ח השפעה אחרי 90 יום.</p></div>
   </div>
 </section>`;
